@@ -1,17 +1,19 @@
 const usermodel=require('../models/user.model')
 const bcrypt=require('bcryptjs');
+const jwt=require('jsonwebtoken');
+const JWT_SECRET_KEY=process.env.JWT_SECRET_KEY;
 
 
 async function registerUser(req,res){
     const {name, email,password,role}=req.body;
 
-    const isUserAlreadyExists= await usermodel.find({
+    const isUserAlreadyExists= await usermodel.findOne({
             email
         
     })
 
     if(isUserAlreadyExists){
-        res.status(409).json("User already Exists");
+        return res.status(409).json("User already Exists");
     }
 
     const hash= await bcrypt.hash(password,10);
@@ -49,10 +51,10 @@ async function loginuser(req,res){
         ]
     })
      if(!isUserExists){
-        res.status(401).json("User not found.Check your credentials.");
+        return res.status(401).json("User not found.Check your credentials.");
      }
 
-     const isuserFound= await bcrypt.compare(password,user.password);
+     const isuserFound= await bcrypt.compare(password,isUserExists.password);
      if(!isuserFound){
         res.status(401).json({
             message:"Wrong Password"
@@ -60,8 +62,7 @@ async function loginuser(req,res){
      }
      const token=jwt.sign({
         id:isUserExists._id,
-        role:isUserExists.role
-
+        role:isUserExists.role,
      },process.env.JWT_SECRET_KEY);
 
      res.status(200).json({

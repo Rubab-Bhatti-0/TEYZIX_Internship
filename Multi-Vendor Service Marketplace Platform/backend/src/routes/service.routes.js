@@ -6,6 +6,7 @@ const service=require('../controllers/service.controller')
 
 
 router.get('/service',service.getAllServices)
+router.get('/service/:id',service.getServiceById)
 router.post('/service',verifyToken,isProvider,service.createService)
 router.put('/service/:id',verifyToken,isProvider,service.editService)
 router.delete('/service/:id',verifyToken,isProvider,service.delService)

@@ -10,13 +10,13 @@ import Footer from "./components/layout/Footer";
 
 // Pages
 import Home from "./pages/Home";
-//import Login from "./pages/Auth/Login";
+import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import RoleSelect from "./pages/Auth/RoleSelect";
 import Services from "./pages/Marketplace/Services";
 import ServiceDetail from "./pages/Marketplace/ServiceDetail";
 import CustomerDashboard from "./pages/Dashboard/CustomerDashboard";
-//import ProviderDashboard from "./pages/Dashboard/ProviderDashboard";
+import ProviderDashboard from "./pages/Dashboard/ProviderDashboard";
 import AdminDashboard from "./pages/Dashboard/AdminDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -25,7 +25,7 @@ function Router() {
     <Switch>
       {/* Public Routes */}
       <Route path={"/"} component={Home} />
-     {/* <Route path={"/login"} component={Login} /> */ }
+     <Route path={"/login"} component={Login} />
       <Route path={"/register"} component={Register} />
       <Route path={"/role-select"} component={RoleSelect} />
       <Route path={"/services"} component={Services} />

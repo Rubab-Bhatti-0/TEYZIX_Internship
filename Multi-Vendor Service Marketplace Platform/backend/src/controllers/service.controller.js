@@ -26,7 +26,7 @@ const createService=async(req,res)=>{
 const getAllServices=async(req,res)=>{
 
     try{
-        const services=await serviceModel.find()
+        const services=await serviceModel.find().populate('provider', 'name email location bio')
         return res.status(200).json(services)
     }catch(err){
         return res.status(500).json({
@@ -34,6 +34,20 @@ const getAllServices=async(req,res)=>{
         })
     }
 
+}
+
+const getServiceById=async(req,res)=>{
+    try{
+        const service=await serviceModel.findById(req.params.id).populate('provider', 'name email location bio')
+        if(!service){
+            return res.status(404).json({message:"Service not found"})
+        }
+        return res.status(200).json(service)
+    }catch(err){
+        return res.status(500).json({
+            message:err.message
+        })
+    }
 }
 
 const editService=async(req,res)=>{
@@ -64,4 +78,4 @@ const delService=async(req,res)=>{
 
 }
 
-module.exports={createService,editService,delService,getAllServices}
+module.exports={createService,editService,delService,getAllServices,getServiceById}

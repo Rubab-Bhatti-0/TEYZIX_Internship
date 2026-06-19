@@ -43,15 +43,15 @@ export const authService = {
 };
 
 export const serviceService = {
-  getAllServices: () => api.get('/service'),
-  getServiceById: (id: string) => api.get(`/service/${id}`),
-  createService: (data: any) => api.post('/service', data),
-  updateService: (id: string, data: any) => api.put(`/service/${id}`, data),
-  deleteService: (id: string) => api.delete(`/service/${id}`),
+  getAllServices: () => api.get('/service/service'),
+  getServiceById: (id: string) => api.get(`/service/service/${id}`),
+  createService: (data: any) => api.post('/service/service', data),
+  updateService: (id: string, data: any) => api.put(`/service/service/${id}`, data),
+  deleteService: (id: string) => api.delete(`/service/service/${id}`),
 };
 
 export const projectService = {
-  createProject: (data: any) => api.post('/project', data),
+  createProject: (data: any) => api.post('/project/project', data),
   getMyRequests: () => api.get('/project/myRequests'),
   getProviderRequests: () => api.get('/project/provider'),
   updateStatus: (id: string, status: string) =>

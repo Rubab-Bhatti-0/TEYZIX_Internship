@@ -1,27 +1,28 @@
 const mongoose=require('mongoose');
 
 const providerSchema=new mongoose.Schema({
-    user={
+    user:{
         type:mongoose.Schema.Types.ObjectId,
-        required:true
+        required:true,
+        ref:'user'
     },
-    picture={
+    picture:{
         type:String
     },
-    skills={
+    skills:{
         type:[String]
     },
-    experience={
+    experience:{
         type:Number
     },
-    pricing={
+    pricing:{
         type:Number
     },
-    portfolio={
+    portfolio:{
         type:[String]
     }
 
-},{timestamps=true})
+},{timestamps:true})
 
-const ProviderModel=mongoose.model('provider',providerSchema);
+const providerModel=mongoose.model('provider',providerSchema);
 module.exports=providerModel;

@@ -1,6 +1,6 @@
 const express=require ('express')
 
-const router=express.router
+const router=express.Router()
 const {verifyToken,isProvider} =require('../middleware/auth.middleware')
 const service=require('../controllers/service.controller')
 

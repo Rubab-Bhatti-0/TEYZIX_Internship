@@ -33,10 +33,11 @@ async function registerUser(req,res){
 
 
 res.status(201).json({
-   message:"New user created successfully!"
+   message:"New user created successfully!",
+   token:token,
+   user:{id:user._id, name:user.name, email:user.email, role:user.role}
 })
     
-
 
 }
 
@@ -45,10 +46,7 @@ async function loginuser(req,res){
     const {email , password}=req.body;
 
     const isUserExists= await usermodel.findOne({
-        $or:[
-            {email},
-            {password}
-        ]
+        email
     })
      if(!isUserExists){
         return res.status(401).json("User not found.Check your credentials.");
@@ -56,7 +54,7 @@ async function loginuser(req,res){
 
      const isuserFound= await bcrypt.compare(password,isUserExists.password);
      if(!isuserFound){
-        res.status(401).json({
+        return res.status(401).json({
             message:"Wrong Password"
         })
      }
@@ -66,7 +64,9 @@ async function loginuser(req,res){
      },process.env.JWT_SECRET_KEY);
 
      res.status(200).json({
-        message:"Login successfully!"
+        message:"Login successfully!",
+        token:token,
+        user:{id:isUserExists._id, name:isUserExists.name, email:isUserExists.email, role:isUserExists.role}
      })
 
 

@@ -7,8 +7,8 @@ const app=express();
 app.use(express.json());
 
 app.use('/api/auth',authRoutes)
-app.use('./api/service',serviceRoutes)
-app.use('./api/service',projectRoutes)
+app.use('/api/service',serviceRoutes)
+app.use('/api/project',projectRoutes)
 
 module.exports=app;
 

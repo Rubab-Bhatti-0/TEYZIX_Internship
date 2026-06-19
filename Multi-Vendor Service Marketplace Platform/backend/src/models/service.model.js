@@ -1,28 +1,28 @@
 const mongoose=require('mongoose')
 
 const serviceSchema=new mongoose.Schema({
-    provider={
+    provider:{
         type:mongoose.Schema.Types.ObjectId,
-        require:true
-
+        require:true,
+        ref:'user'
     },
-    Title={
+    Title:{
         type:String,
-        require=true
+        require:true
     },
-    Description={
+    Description:{
         type:String
     },
-    Category={
+    Category:{
         type:String,
         enum:['web-dev', 'design', 'content', 'marketing']
 
     },
-    Price={
+    Price:{
         type:Number
 
     },
-    DeliveryTime={
+    DeliveryTime:{
         type:Date
     }
 

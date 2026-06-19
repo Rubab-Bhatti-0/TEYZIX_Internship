@@ -1,37 +1,39 @@
 const mongoose=require ('mongoose')
 
 const projectSchema=new mongoose.Schema({
-    Customer={
+    Customer:{
         type:mongoose.Schema.Types.ObjectId,
-        require:true
+        require:true,
+        ref:'user'
     },
-    Provider={
+    Provider:{
         type:mongoose.Schema.Types.ObjectId,
-        require:true
+        require:true,
+        ref:'user'
     },
-    Requirements={
+    Requirements:{
         type:String
     },
-    Budget={
+    Budget:{
         type:Number,
         require:true
     },
-    Deadline={
+    Deadline:{
         type:Date,
         require:true
     },
-    status={
+    status:{
         type:String,
         enum:["Pending","Accepted","Progress","Completed","Delivered"],
         default:"Pending"
     },
-    rating={
+    rating:{
         type:Number
     },
     feedback:{
         type:String
     }
-})
+},{timestamps:true})
 
 const projectModel=mongoose.model('project',projectSchema)
 module.exports=projectModel
